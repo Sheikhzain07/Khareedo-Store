@@ -36,8 +36,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "SINGLE_LOADING" });
     try {
       let res = await axios.get(url);
-      let singleProduct = await res.data;
-      dispatch({ type: "SET_SINGLE_PRODUCT", payload: singleProduct });
+      let mySingleProduct = await res.data;
+      dispatch({ type: "SET_SINGLE_PRODUCT", payload: mySingleProduct });
     } catch (error) {
       dispatch({ type: "SET_SINGLE_ERROR" });
     }

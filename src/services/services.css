@@ -1,0 +1,26 @@
+.service__item {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.7rem;
+  cursor: pointer;
+}
+.service__item span i {
+  font-size: 2.2rem;
+  background-color: var(--primary-color);
+  border-radius: 50px;
+  padding: 10px;
+  color: #fff;
+  font-weight: 400 !important;
+}
+.service__item h3 {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+.service__item p {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #222;
+}

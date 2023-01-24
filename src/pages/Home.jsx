@@ -15,6 +15,9 @@ import Clock from "../components/UI/Clock";
 function Home() {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [bestSalesProducts, setBestSalesProducts] = useState([]);
+  const [mobileProducts, setMobileProducts] = useState([]);
+  const [wirelessProducts, setWirelessProducts] = useState([]);
+  const [popularProducts, setPopularProducts] = useState([]);
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -25,9 +28,21 @@ function Home() {
     const filteredBestSalesProducts = productsData.filter(
       (item) => item.category === "sofa"
     );
+    const filteredMobileProducts = productsData.filter(
+      (item) => item.category === "mobile"
+    );
+    const filteredWirelessProducts = productsData.filter(
+      (item) => item.category === "wireless"
+    );
+    const filteredPopularProducts = productsData.filter(
+      (item) => item.category === "watch"
+    );
 
     setTrendingProducts(filteredTrendingProducts);
     setBestSalesProducts(filteredBestSalesProducts);
+    setMobileProducts(filteredMobileProducts);
+    setWirelessProducts(filteredWirelessProducts);
+    setPopularProducts(filteredPopularProducts);
   }, []);
   return (
     <TitleOfApp title={"Home"}>
@@ -77,7 +92,6 @@ function Home() {
           </Row>
         </Container>
       </section>
-
       <section className="timer__count">
         <Container>
           <Row>
@@ -97,6 +111,29 @@ function Home() {
             <Col lg="6" md="6" className="text-end">
               <img src={counterImg} alt="counterImg" />
             </Col>
+          </Row>
+        </Container>
+      </section>
+
+      <section className="new__arrivals">
+        <Container>
+          <Row>
+            <Col lg="12" className="text-center">
+              <h2 className="section__title">New Arrivals</h2>
+            </Col>
+            <ProductsList data={mobileProducts} />
+            <ProductsList data={wirelessProducts} />
+          </Row>
+        </Container>
+      </section>
+
+      <section className="popular__category">
+        <Container>
+          <Row>
+            <Col lg="12" className="text-center mb-5">
+              <h2 className="section__title">Popular in Category</h2>
+            </Col>
+            <ProductsList data={popularProducts} />
           </Row>
         </Container>
       </section>

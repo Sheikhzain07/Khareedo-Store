@@ -5,7 +5,7 @@ function ProductsList({ data }) {
   return (
     <>
       {data.map((ele) => {
-        return <ProductCard ele={ele} />;
+        return <ProductCard key={ele.id} ele={ele} />;
       })}
     </>
   );

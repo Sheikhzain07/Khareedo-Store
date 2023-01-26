@@ -5,6 +5,7 @@ import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../redux/slices/cartSlice";
+import { toast } from "react-toastify";
 
 function ProductCard({ ele }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function ProductCard({ ele }) {
         name: ele.productName,
       })
     );
-    alert("added to cart");
+    toast.success("Added to the cart");
   };
 
   return (

@@ -11,19 +11,19 @@ function Shop() {
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
-    if (filterValue == "sofa") {
+    if (filterValue === "sofa") {
       const filteredData = products.filter((ele) => ele.category === "sofa");
       setProductsData(filteredData);
-    } else if (filterValue == "chair") {
+    } else if (filterValue === "chair") {
       const filteredData = products.filter((ele) => ele.category === "chair");
       setProductsData(filteredData);
-    } else if (filterValue == "mobile") {
+    } else if (filterValue === "mobile") {
       const filteredData = products.filter((ele) => ele.category === "mobile");
       setProductsData(filteredData);
-    } else if (filterValue == "watch") {
+    } else if (filterValue === "watch") {
       const filteredData = products.filter((ele) => ele.category === "watch");
       setProductsData(filteredData);
-    } else if (filterValue == "wireless") {
+    } else if (filterValue === "wireless") {
       const filteredData = products.filter(
         (ele) => ele.category === "wireless"
       );
@@ -41,6 +41,23 @@ function Shop() {
     setProductsData(searchedData);
   };
 
+  const handleSort = (e) => {
+    const myVal = e.target.value;
+    if (myVal === "lth") {
+      let newArr = [...productsData];
+      const sortedData = newArr.sort((a, b) => {
+        return a.price - b.price;
+      });
+      setProductsData(sortedData);
+    }
+    if (myVal === "htl") {
+      let newArr = [...productsData];
+      const sortedData = newArr.sort((a, b) => {
+        return b.price - a.price;
+      });
+      setProductsData(sortedData);
+    }
+  };
   return (
     <TitleOfApp title="Shop">
       <CommonSection title={"Products"} />
@@ -62,7 +79,7 @@ function Shop() {
             </Col>
             <Col lg="3" md="3">
               <div className="filter__widget">
-                <select>
+                <select onChange={handleSort}>
                   <option value="">Sort by Price</option>
                   <option value="lth">Low to High</option>
                   <option value="htl">High to Low</option>

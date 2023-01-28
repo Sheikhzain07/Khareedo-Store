@@ -65,7 +65,7 @@ function Shop() {
       <section>
         <Container>
           <Row>
-            <Col lg="3" md="3">
+            <Col lg="3" md="6">
               <div className="filter__widget">
                 <select onChange={handleFilter}>
                   <option value="">Filter by Category</option>
@@ -77,8 +77,8 @@ function Shop() {
                 </select>
               </div>
             </Col>
-            <Col lg="3" md="3">
-              <div className="filter__widget">
+            <Col lg="3" md="6">
+              <div className="filter__widget text-end">
                 <select onChange={handleSort}>
                   <option value="">Sort by Price</option>
                   <option value="lth">Low to High</option>
@@ -86,7 +86,7 @@ function Shop() {
                 </select>
               </div>
             </Col>
-            <Col lg="6" md="6">
+            <Col lg="6" md="12">
               <div className="search__box">
                 <input
                   type="text"

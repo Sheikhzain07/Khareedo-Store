@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import TitleOfApp from "../components/titleApp/TitleOfApp";
 import products from "../assets/data/products";
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 function ProductDetails() {
   const [tab, setTab] = useState("desc");
-  // const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState(null);
 
   const reviewUser = useRef("");
   const reviewMsg = useRef("");
@@ -40,6 +40,15 @@ function ProductDetails() {
     e.preventDefault();
     const reviewUserName = reviewUser.current.value;
     const reviewUserMsg = reviewMsg.current.value;
+    // console.log(reviewUserMsg, reviewUserName);
+
+    const reviewObj = {
+      user: reviewUserName,
+      text: reviewUserMsg,
+      rating,
+    };
+    console.log(reviewObj);
+    toast.success("Review Submitted");
   };
 
   const addToCart = () => {
@@ -53,6 +62,10 @@ function ProductDetails() {
     );
     toast.success("Add to Cart");
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
   return (
     <TitleOfApp title={productName}>
       <CommonSection title={productName} />
@@ -153,37 +166,58 @@ function ProductDetails() {
                             type="text"
                             ref={reviewUser}
                             placeholder="Enter your name"
+                            required
                           />
                         </div>
 
                         <div className="form__group rating__group d-flex align-items-center gap-5">
-                          <span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(1)}
+                          >
                             1<i class="ri-star-s-fill"></i>
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(2)}
+                          >
                             2<i class="ri-star-s-fill"></i>
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(3)}
+                          >
                             3<i class="ri-star-s-fill"></i>
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(4)}
+                          >
                             4<i class="ri-star-s-fill"></i>
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(5)}
+                          >
                             5<i class="ri-star-s-fill"></i>
-                          </span>
+                          </motion.span>
                         </div>
                         <div className="form__group">
                           <textarea
                             ref={reviewMsg}
                             rows={4}
                             type="text"
+                            required
                             placeholder="Write your Feedback"
                           />
                         </div>
-                        <button type="submit" className="buy__btn">
+                        <motion.button
+                          whileTap={{ scale: 1.2 }}
+                          type="submit"
+                          className="buy__btn"
+                        >
                           Submit
-                        </button>
+                        </motion.button>
                       </form>
                     </div>
                   </div>

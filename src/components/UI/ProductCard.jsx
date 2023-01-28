@@ -14,9 +14,9 @@ function ProductCard({ ele }) {
     dispatch(
       cartActions.addItem({
         id: ele.id,
-        image: ele.imgUrl,
+        imgUrl: ele.imgUrl,
         price: ele.price,
-        name: ele.productName,
+        productName: ele.productName,
       })
     );
     toast.success("Added to the cart");

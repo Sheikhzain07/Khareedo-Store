@@ -78,7 +78,7 @@ const Tr = ({ ele }) => {
         <img src={ele.imgUrl} alt="cartImage" />
       </td>
       <td>{ele.productName}</td>
-      <td>{ele.price}</td>
+      <td>₹ {ele.price}</td>
       <td>{ele.quantity}</td>
       <td>
         <motion.i

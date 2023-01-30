@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import TitleOfApp from "../components/titleApp/TitleOfApp";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
-
+import { Link } from "react-router-dom";
+import "../styles/login.css";
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <TitleOfApp title="Login">
       <section>
         <Container>
           <Row>
             <Col lg="6" className="m-auto text-center">
-              <h3 className="fw-bold fs-4">Login</h3>
+              <h3 className="fw-bold mb-4">Login</h3>
 
               <Form className="auth__form">
                 <FormGroup className="form__group">
-                  <input type="email" placeholder="Enter your Email" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your Email"
+                  />
                 </FormGroup>
                 <FormGroup className="form__group">
-                  <input type="password" placeholder="Enter your Password" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your Password"
+                  />
                 </FormGroup>
-                <button className="but_btn auth_btn">Login</button>
+                <button className="buy__btn auth__btn">Login</button>
+                <p>
+                  Don't have an account?{" "}
+                  <Link to="/signup">Create an account</Link>
+                </p>
               </Form>
             </Col>
           </Row>

@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import TitleOfApp from "../components/titleApp/TitleOfApp";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase.config";
+import { toast } from "react-toastify";
 import "../styles/login.css";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <TitleOfApp title="Login">

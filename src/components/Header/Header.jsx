@@ -1,13 +1,15 @@
 import React, { useRef, useEffect } from "react";
 import "./header.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Container, Row } from "reactstrap";
+import { Container, Row, Toast } from "reactstrap";
 import logo from "../../assets/images/eco-logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import useAuth from "../../custom--hookes/useAuth";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
 
 const nav__links = [
   {
@@ -26,6 +28,7 @@ const nav__links = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const profileActionRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
@@ -37,6 +40,7 @@ const Header = () => {
   const navigateToHome = () => {
     navigate("/");
   };
+
   const stickyHeaderFun = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -49,6 +53,9 @@ const Header = () => {
       }
     });
   };
+  const logout = () => {
+    signoutToast.error;
+  };
   useEffect(() => {
     stickyHeaderFun();
 
@@ -57,6 +64,8 @@ const Header = () => {
   const menuToggle = () => {
     menuRef.current.classList.toggle("active__menu");
   };
+  const toggleProfileActions = () =>
+    profileActionRef.current.classList.toggle("show__profileActions");
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -101,14 +110,19 @@ const Header = () => {
                   whileTap={{ scale: 1.2 }}
                   src={currentUser ? currentUser.photoURL : userIcon}
                   alt="userIcon"
+                  onClick={toggleProfileActions}
                 />
-                <div className="profile__actions">
+                <div
+                  className="profile__actions"
+                  ref={profileActionRef}
+                  onClick={toggleProfileActions}
+                >
                   {currentUser ? (
                     <span>Logout</span>
                   ) : (
                     <div>
-                      <Link to={"/signup"}>Signup</Link>
-                      <Link to={"/login"}>Login</Link>
+                      <Link to="/signup">Signup</Link>
+                      <Link to="/login">Login</Link>
                     </div>
                   )}
                 </div>

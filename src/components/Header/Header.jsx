@@ -6,6 +6,8 @@ import logo from "../../assets/images/eco-logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import useAuth from "../../custom--hookes/useAuth";
+import { Link } from "react-router-dom";
 
 const nav__links = [
   {
@@ -25,6 +27,8 @@ const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   const navigateToCart = () => {
@@ -92,13 +96,23 @@ const Header = () => {
                 <i className="ri-shopping-bag-line"></i>
                 <span className="badge">{totalQuantity}</span>
               </span>
-              <span>
+              <div className="profile">
                 <motion.img
                   whileTap={{ scale: 1.2 }}
-                  src={userIcon}
+                  src={currentUser ? currentUser.photoURL : userIcon}
                   alt="userIcon"
                 />
-              </span>
+                <div className="profile__actions">
+                  {currentUser ? (
+                    <span>Logout</span>
+                  ) : (
+                    <div>
+                      <Link to={"/signup"}>Signup</Link>
+                      <Link to={"/login"}>Login</Link>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>
                   <i class="ri-menu-line"></i>

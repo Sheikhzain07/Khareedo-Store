@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import "./header.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Container, Row, Toast } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import logo from "../../assets/images/eco-logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import useAuth from "../../custom--hookes/useAuth";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.config";
+import { toast } from "react-toastify";
 
 const nav__links = [
   {
@@ -54,7 +55,14 @@ const Header = () => {
     });
   };
   const logout = () => {
-    signoutToast.error;
+    signOut(auth)
+      .then(() => {
+        toast.success("Logged out");
+        navigate("/home");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   useEffect(() => {
     stickyHeaderFun();
@@ -64,8 +72,10 @@ const Header = () => {
   const menuToggle = () => {
     menuRef.current.classList.toggle("active__menu");
   };
+
   const toggleProfileActions = () =>
     profileActionRef.current.classList.toggle("show__profileActions");
+
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -112,15 +122,16 @@ const Header = () => {
                   alt="userIcon"
                   onClick={toggleProfileActions}
                 />
+                {/* <p>{currentUser.displayName}</p> */}
                 <div
                   className="profile__actions"
                   ref={profileActionRef}
                   onClick={toggleProfileActions}
                 >
                   {currentUser ? (
-                    <span>Logout</span>
+                    <span onClick={logout}>Logout</span>
                   ) : (
-                    <div>
+                    <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to="/signup">Signup</Link>
                       <Link to="/login">Login</Link>
                     </div>

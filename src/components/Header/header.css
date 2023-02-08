@@ -81,15 +81,15 @@
   top: 98%;
   left: 0;
   width: 150px;
-  z-index: 10000;
+  z-index: 10;
   padding: 15px;
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: var(--card-bg-01);
   line-height: 30px;
-  cursor: pointer;
   display: none;
+  cursor: pointer;
 }
 .show__profileActions {
   display: block;

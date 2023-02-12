@@ -73,8 +73,11 @@ const Header = () => {
     menuRef.current.classList.toggle("active__menu");
   };
 
-  const toggleProfileActions = () =>
-    profileActionRef.current.classList.toggle("show__profileActions");
+  const toggleProfileActions = () => {
+    profileActionRef.current.style.display = "flex";
+    console.log(profileActionRef.current.style.display);
+    console.log(document.querySelector(".profile__actions").style.display);
+  };
 
   return (
     <header className="header" ref={headerRef}>

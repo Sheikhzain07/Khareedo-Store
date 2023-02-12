@@ -41,7 +41,9 @@ const Header = () => {
   const navigateToHome = () => {
     navigate("/");
   };
-
+  const handleHeart = () => {
+    toast.success("Feature coming soon");
+  };
   const stickyHeaderFun = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -75,8 +77,8 @@ const Header = () => {
 
   const toggleProfileActions = () => {
     profileActionRef.current.style.display = "flex";
-    console.log(profileActionRef.current.style.display);
-    console.log(document.querySelector(".profile__actions").style.display);
+    // console.log(profileActionRef.current.style.display);
+    // console.log(document.querySelector(".profile__actions").style.display);
   };
 
   return (
@@ -110,7 +112,7 @@ const Header = () => {
               </ul>
             </div>
             <div className="nav__icons">
-              <span className="fav__icon">
+              <span className="fav__icon" onClick={handleHeart}>
                 <i className="ri-heart-line"></i>
                 <span className="badge">1</span>
               </span>

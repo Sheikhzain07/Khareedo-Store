@@ -8,27 +8,69 @@ function Clock() {
   const [seconds, setSeconds] = useState();
 
   let interval;
+  // const countDown = () => {
+  //   const destination = new Date("Mar 30,2023").getTime(); //gives time in ms
+
+  //   interval = setInterval(() => {
+  //     const now = new Date().getTime();
+  //     const difference = destination - now;
+  //     const days = Math.floor(difference / (1000 * 60 * 60 * 24)); //it will give days
+  //     const hours = Math.floor(
+  //       (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //     ); //it will give remaining hours
+  //     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  //     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  //     if (destination < 0) clearInterval(interval.current);
+  //     else {
+  //       setDays(days);
+  //       setHours(hours);
+  //       setMinutes(minutes);
+  //       setSeconds(seconds);
+  //     }
+  //   });
+  // };
   const countDown = () => {
-    const destination = new Date("Mar 30,2023").getTime(); //gives time in ms
+    let destination;
+
+    // Check if there's already a saved countdown end time
+    const savedTime = localStorage.getItem("countdownEndTime");
+
+    if (savedTime) {
+      destination = parseInt(savedTime, 10);
+    } else {
+      // Set a new destination time (4 days from now)
+      destination = new Date().getTime() + 4 * 24 * 60 * 60 * 1000;
+      localStorage.setItem("countdownEndTime", destination);
+    }
 
     interval = setInterval(() => {
       const now = new Date().getTime();
       const difference = destination - now;
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24)); //it will give days
-      const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      ); //it will give remaining hours
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      if (destination < 0) clearInterval(interval.current);
-      else {
+      if (difference <= 0) {
+        clearInterval(interval.current);
+        localStorage.removeItem("countdownEndTime"); // optional: reset for next session
+        setDays(0);
+        setHours(0);
+        setMinutes(0);
+        setSeconds(0);
+      } else {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (difference % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
         setDays(days);
         setHours(hours);
         setMinutes(minutes);
         setSeconds(seconds);
       }
-    });
+    }, 1000); // update every second
   };
   useEffect(() => {
     countDown();

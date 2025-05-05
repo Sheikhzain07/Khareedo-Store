@@ -7,7 +7,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import Shop from "../pages/Shop";
 import Checkout from "../pages/Checkout";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./protectedRoute";
 
 function Routers() {
   return (
